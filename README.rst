@@ -21,7 +21,7 @@ This is a simple simulation and it's not meant to be accurate. You can read
 this blog post_ which is about the back story and thoughts or watch this video_
 to see how it's animated.
 
-.. _post: http://blog.yjl.im/2015/10/startrailc.html
+.. _post: http://blog.yjl.im/2015/10/startrailc-star-trail-in-terminal.html
 .. _video: https://youtu.be/f4t0_H7Lkyw
 
 
