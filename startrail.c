@@ -410,6 +410,7 @@ main(int argc, char *argv[])
         return EXIT_SUCCESS;
       case 'v':
         printf("%s %s\n", STR(PROGRAM), STR(VERSION));
+        printf("built on %s\n", __DATE__);
 #ifdef matheval
         printf("with libmatheval\n");
 #else

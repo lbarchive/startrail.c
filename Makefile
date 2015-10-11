@@ -1,5 +1,5 @@
 PACKAGE ?= Example
-VERSION ?= $(shell hg log --template '{latesttag}-{latesttagdistance}-{node|short}' -r . || echo unknown)
+VERSION ?= $(shell hg log --template '{latesttag}-{latesttagdistance}-{node|short} ({date|rfc3339date})' -r . || echo unknown)
 
 PROGRAM = startrail
 SOURCES = startrail.c
@@ -28,7 +28,7 @@ endif
 CPPFLAGS += -DPREFIX=$(PREFIX)   \
             -DPACKAGE=$(PACKAGE) \
             -DPROGRAM=$(PROGRAM) \
-            -DVERSION=$(VERSION)
+            -DVERSION='$(VERSION)'
 
 all: $(PROGRAM)
 .PHONY: all
