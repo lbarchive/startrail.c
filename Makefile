@@ -7,7 +7,7 @@ SOURCES = startrail.c
 CC       ?= gcc
 CFLAGS   ?= -g -O2
 CFLAGS   += -std=c99 -Wall -Wextra -pedantic
-CPPFLAGS += -D_POSIX_C_SOURCE=199309L
+CPPFLAGS += -D_POSIX_C_SOURCE=200809L
 LDLIBS   += -lm $(shell ncursesw5-config --cflags --libs)
 
 INSTALL     = install

@@ -29,12 +29,14 @@
 
 #include <curses.h>
 #include <getopt.h>
+#include <locale.h>
 #include <math.h>
 #ifdef matheval
 #include <matheval.h>
 #endif
 #include <signal.h>
 #include <stdlib.h>
+#include <string.h>
 #include <time.h>
 #include <unistd.h>
 
@@ -55,7 +57,7 @@
 #endif
 
 #define SCALE_X                    2
-#define DEFAULT_star_char        '*'
+#define DEFAULT_star_char        "*"
 #define DEFAULT_num_stars        100
 #define DEFAULT_angle_min          0
 #define DEFAULT_angle_max        360
@@ -146,7 +148,7 @@ double interval_i    = DEFAULT_interval_i;
 double interval_I    = DEFAULT_interval_I;
 bool grayscale       = FALSE;
 int max_colors       = 0;
-char star_char       = DEFAULT_star_char;
+char *star_char      = NULL;
 
 double r;
 bool   r_overridden = FALSE;
@@ -172,6 +174,7 @@ void
 cleanup(void)
 {
   endwin();
+  free(star_char);
 
 #ifdef matheval
   for (int i = 0; i < 2; i++)
@@ -319,7 +322,7 @@ expose(long i)
     y = CENTER_Y - r * y;
 
     attrset(COLOR_PAIR(s->color));
-    mvaddch(y, x, star_char);
+    mvprintw(y, x, star_char);
   }
 }
 
@@ -368,7 +371,7 @@ main(int argc, char *argv[])
         grayscale = TRUE;
         break;
       case 'c':
-        star_char = optarg[0];
+        star_char = strdup(optarg);
         break;
       case 's':
         astep = atof(optarg);
@@ -416,8 +419,14 @@ main(int argc, char *argv[])
     }
   }
 
+  if (!star_char)
+  {
+    star_char = strdup(DEFAULT_star_char);
+  }
+
   signal(SIGINT, signal_handler);
 
+  setlocale(LC_ALL, "");
   srand(time(NULL));
 
   initscr();
