@@ -5,6 +5,9 @@ CHANGES
 Development
 ===========
 
+Version 0.2.0 (2015-10-31T23:30:40Z)
+====================================
+
 * ``-c`` accepts string
 
   It can be a Unicode string like ``★`` or something like ``/o\``.
